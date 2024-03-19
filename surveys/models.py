@@ -28,3 +28,6 @@ class Link(models.Model):
     from_question = models.ForeignKey(Question, related_name='from_question', on_delete=models.CASCADE)
     to_question = models.ForeignKey(Question, related_name='to_question', on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, related_name='answer', blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.from_question} -> {self.to_question} -> {self.answer}'
