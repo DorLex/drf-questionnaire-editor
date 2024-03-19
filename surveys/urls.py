@@ -1,8 +1,8 @@
 from django.urls import path
 
-from surveys.views import EditAnyLinkAPIView, EditConcreteLinkAPIView
+from surveys.views import AnyLinkAPIView, ConcreteLinkAPIView
 
 urlpatterns = [
-    path('edit-any-link', EditAnyLinkAPIView.as_view(), name='edit_any_link'),
-    path('edit-concrete-link/<int:question_id>', EditConcreteLinkAPIView.as_view(), name='edit_concrete_link'),
+    path('any-link/', AnyLinkAPIView.as_view(), name='any_link'),
+    path('concrete-link/<int:question_id>', ConcreteLinkAPIView.as_view(), name='concrete_link'),
 ]
