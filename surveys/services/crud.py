@@ -1,7 +1,7 @@
 from surveys.models import Link
 
 
-def get_all_links():
+def get_queryset_links():
     links = (
         Link.objects.all()
         .select_related(

@@ -5,14 +5,14 @@ from rest_framework.views import APIView
 
 from surveys.models import Link
 from surveys.serializers.link import LinkSerializer, LinkUpdateSerializer
-from surveys.services.crud import get_all_links
+from surveys.services.crud import get_queryset_links
 
 
 class AnyLinkAPIView(APIView):
     """Любой вопрос - любой ответ"""
 
     def get(self, request):
-        links = get_all_links()
+        links = get_queryset_links()
         serializer = LinkSerializer(links, many=True)
 
         return Response(serializer.data)
