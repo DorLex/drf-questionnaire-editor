@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from django.db import connection
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -15,10 +13,7 @@ class AnyLinkAPIView(APIView):
 
     def get(self, request):
         links = get_all_links()
-
         serializer = LinkSerializer(links, many=True)
-        a = serializer.data
-        pprint(connection.queries)
 
         return Response(serializer.data)
 
