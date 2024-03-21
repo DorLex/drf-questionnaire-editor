@@ -1,21 +1,21 @@
-from django.db import connection
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.utils.serializer_helpers import ReturnList
 from rest_framework.views import APIView
 
 from surveys.models import Link
-from surveys.serializers.link import LinkSerializer, LinkUpdateSerializer
-from surveys.services.crud import get_queryset_links
+from surveys.serializers.link import LinkUpdateSerializer
+from surveys.services.link import LinkService
 
 
 class AnyLinkAPIView(APIView):
     """Любой вопрос - любой ответ"""
 
-    def get(self, request):
-        links = get_queryset_links()
-        serializer = LinkSerializer(links, many=True)
+    link_service = LinkService()
 
-        return Response(serializer.data)
+    def get(self, request):
+        links: ReturnList = self.link_service.get_all()
+        return Response(links)
 
     def put(self, request):
         from_question_id = request.data.get('from_question_id')

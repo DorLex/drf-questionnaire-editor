@@ -9,10 +9,11 @@ from surveys.serializers.survey import SurveySerializer
 class SurveyService:
     _repository = SurveyRepository()
     _factory = SurveyFactory()
+    _serializer = SurveySerializer
 
     def get_all(self) -> ReturnList:
         surveys: QuerySet = self._repository.get_all()
-        serializer = SurveySerializer(surveys, many=True)
+        serializer = self._serializer(surveys, many=True)
         return serializer.data
 
     def create(self, data: dict) -> ReturnDict:
