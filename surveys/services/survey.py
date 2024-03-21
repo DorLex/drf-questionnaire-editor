@@ -26,5 +26,5 @@ class SurveyService:
         return serializer.data
 
     def create(self, data: dict) -> ReturnDict:
-        survey: ReturnDict = self._factory.create(data)
-        return survey
+        survey_data: ReturnDict = self._factory.create(data)
+        return survey_data
