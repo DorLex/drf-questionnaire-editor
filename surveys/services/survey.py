@@ -1,5 +1,5 @@
 from django.db.models import QuerySet
-from rest_framework.utils.serializer_helpers import ReturnList
+from rest_framework.utils.serializer_helpers import ReturnList, ReturnDict
 
 from surveys.factories.survey import SurveyFactory
 from surveys.repositories.survey import SurveyRepository
@@ -15,5 +15,6 @@ class SurveyService:
         serializer = SurveySerializer(surveys, many=True)
         return serializer.data
 
-    def create(self):
-        self._factory.create()
+    def create(self, data: dict) -> ReturnDict:
+        survey: ReturnDict = self._factory.create(data)
+        return survey
