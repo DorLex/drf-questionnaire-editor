@@ -22,10 +22,10 @@ class SurveyRepository:
         survey: Survey = get_object_or_404(self._model, pk=pk)
         return survey
 
-    def update(self, pk: int, data: dict) -> ReturnDict:
+    def update(self, pk: int, data: dict, partial=False) -> ReturnDict:
         survey: Survey = self.get_by_id(pk)
 
-        serializer = self._serializer(survey, data)
+        serializer = self._serializer(survey, data, partial=partial)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 

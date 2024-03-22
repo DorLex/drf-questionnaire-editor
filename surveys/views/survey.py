@@ -13,19 +13,20 @@ class SurveyViewSet(ViewSet):
         return Response(surveys)
 
     def create(self, request):
-        survey: ReturnDict = self.survey_service.create(request.data)
-        return Response(survey)
+        survey_data: ReturnDict = self.survey_service.create(request.data)
+        return Response(survey_data)
 
     def retrieve(self, request, pk=None):
-        survey: ReturnDict = self.survey_service.get_by_id(pk)
-        return Response(survey)
+        survey_data: ReturnDict = self.survey_service.get_by_id(pk)
+        return Response(survey_data)
 
     def update(self, request, pk=None):
-        survey: ReturnDict = self.survey_service.update(pk, request.data)
-        return Response(survey)
+        survey_data: ReturnDict = self.survey_service.update(pk, request.data)
+        return Response(survey_data)
 
     def partial_update(self, request, pk=None):
-        pass
+        survey_data: ReturnDict = self.survey_service.update(pk, request.data, partial=True)
+        return Response(survey_data)
 
     def destroy(self, request, pk=None):
         pass

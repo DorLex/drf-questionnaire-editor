@@ -34,6 +34,6 @@ class SurveyService:
         survey_data: ReturnDict = self._factory.create(data)
         return survey_data
 
-    def update(self, pk: int, data: dict) -> ReturnDict:
-        survey_data: ReturnDict = self._repository.update(pk, data)
+    def update(self, pk: int, data: dict, partial=False) -> ReturnDict:
+        survey_data: ReturnDict = self._repository.update(pk, data, partial)
         return survey_data
