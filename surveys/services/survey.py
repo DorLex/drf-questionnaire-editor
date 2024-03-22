@@ -19,12 +19,21 @@ class SurveyService:
         return serializer.data
 
     def get_where(self, filters: dict) -> ReturnDict:
-        surveys_qs: QuerySet = self._repository.get_where(filters)
-        survey: Survey = get_object_or_404(surveys_qs)
+        surveys: QuerySet = self._repository.get_where(filters)
+        serializer = self._serializer(surveys, many=True)
+
+        return serializer.data
+
+    def get_by_id(self, pk: int) -> ReturnDict:
+        survey: Survey = self._repository.get_by_id(pk)
         serializer = self._serializer(survey)
 
         return serializer.data
 
     def create(self, data: dict) -> ReturnDict:
         survey_data: ReturnDict = self._factory.create(data)
+        return survey_data
+
+    def update(self, pk: int, data: dict) -> ReturnDict:
+        survey_data: ReturnDict = self._repository.update(pk, data)
         return survey_data

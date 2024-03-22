@@ -17,12 +17,12 @@ class SurveyViewSet(ViewSet):
         return Response(survey)
 
     def retrieve(self, request, pk=None):
-        filters = {'pk': pk}
-        survey: ReturnDict = self.survey_service.get_where(filters)
+        survey: ReturnDict = self.survey_service.get_by_id(pk)
         return Response(survey)
 
     def update(self, request, pk=None):
-        pass
+        survey: ReturnDict = self.survey_service.update(pk, request.data)
+        return Response(survey)
 
     def partial_update(self, request, pk=None):
         pass
