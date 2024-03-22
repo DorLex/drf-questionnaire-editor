@@ -30,3 +30,9 @@ class SurveyRepository:
         serializer.save()
 
         return serializer.data
+
+    def delete(self, pk: int) -> Survey:
+        survey: Survey = get_object_or_404(self._model, pk=pk)
+        survey.delete()
+
+        return survey

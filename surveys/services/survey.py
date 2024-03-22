@@ -37,3 +37,9 @@ class SurveyService:
     def update(self, pk: int, data: dict, partial=False) -> ReturnDict:
         survey_data: ReturnDict = self._repository.update(pk, data, partial)
         return survey_data
+
+    def delete(self, pk: int) -> ReturnDict:
+        survey: Survey = self._repository.delete(pk)
+        serializer = self._serializer(survey)
+
+        return serializer.data

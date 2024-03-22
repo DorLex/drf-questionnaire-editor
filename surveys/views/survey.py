@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.utils.serializer_helpers import ReturnList, ReturnDict
 from rest_framework.viewsets import ViewSet
@@ -14,7 +15,7 @@ class SurveyViewSet(ViewSet):
 
     def create(self, request):
         survey_data: ReturnDict = self.survey_service.create(request.data)
-        return Response(survey_data)
+        return Response(survey_data, status.HTTP_201_CREATED)
 
     def retrieve(self, request, pk=None):
         survey_data: ReturnDict = self.survey_service.get_by_id(pk)
@@ -29,4 +30,5 @@ class SurveyViewSet(ViewSet):
         return Response(survey_data)
 
     def destroy(self, request, pk=None):
-        pass
+        survey_data: ReturnDict = self.survey_service.delete(pk)
+        return Response(survey_data, status.HTTP_204_NO_CONTENT)
